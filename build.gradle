@@ -1,0 +1,41 @@
+plugins {
+    id 'ear'
+}
+
+group 'com.jfisherdev'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // The following dependencies will be the ear modules and
+    // will be placed in the ear root
+    // deploy project(':war')
+    deploy project(path: ':ejb', configuration: 'archives')
+    earlib project(':wf-ejb-commons')
+
+    // The following dependencies will become ear libs and will
+    // be placed in a dir configured via the libDirName property
+    // earlib group: 'log4j', name: 'log4j'
+}
+
+ear {
+    deploymentDescriptor {
+        initializeInOrder = true
+        module("ejb.jar", "ejb")
+    }
+}
+
+task deployStandalone(dependsOn: build) {
+    doLast {
+        String systemProperty = System.getProperty("wildfly.home")
+        String envHome = System.getenv("WILDFLY_HOME") != null ? System.getenv("WILDFLY_HOME") : System.getenv("JBOSS_HOME")
+        String wildflyHome = systemProperty != null ? systemProperty : envHome
+        String deploymentsDir = wildflyHome + "/standalone/deployments"
+        copy {
+            from "$buildDir/libs/wf-ejb-http-naming.ear"
+            into deploymentsDir
+        }
+    }
+}

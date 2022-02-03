@@ -1,4 +1,9 @@
-# Compiled class file
+**/build/
+.idea/*
+!.idea/gradle.xml
+!.idea/runConfigurations/
+!.idea/vcs.xml
+
 *.class
 
 # Log file

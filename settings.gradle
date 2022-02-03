@@ -1,0 +1,5 @@
+rootProject.name = 'wf-ejb-http-naming'
+include 'wf-ejb-commons'
+include 'ejb'
+include 'ejbclient'
+

@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'com.jfisherdev'
+version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation project(":wf-ejb-commons")
+    //TODO Figure out how to use the BOM commented out below instead
+    implementation 'org.wildfly:wildfly-client-all:26.0.1.Final'
+    //implementation 'org.wildfly:wildfly-ejb-client-bom:26.0.1.Final'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
