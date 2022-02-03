@@ -38,7 +38,7 @@ Generated message: %dkdL2>m#>,O>S2t`0yM)
 ## http/s
 
 ```
-Using java.naming.provider.url: http://localhost:35000/wildfly-services
+Using java.naming.provider.url: http://localhost:8080/wildfly-services
 Looking up bean 'MessageGenerator' with lookup name of: wf-ejb-http-naming/ejb//MessageGenerator!com.jfisherdev.wfejbhttpnaming.commons.ejb.MessageGeneratorRemote
 Message will be 15 characters long
 Generated message: #%W1+Mq9k2e}C7]
