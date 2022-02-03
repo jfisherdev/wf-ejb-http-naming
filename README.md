@@ -1,6 +1,8 @@
 # wf-ejb-http-naming
 Example for demonstrating an issue with WildFly EJB client lookups over http when a bean name contains a "/"
 
+This issue is documented by [WFLY-16001](https://issues.redhat.com/browse/WFLY-16001)
+
 # The Issue
 
 This requires an EJB whose bean name contains a `/` character, such as `ejbs/MyBean`.
