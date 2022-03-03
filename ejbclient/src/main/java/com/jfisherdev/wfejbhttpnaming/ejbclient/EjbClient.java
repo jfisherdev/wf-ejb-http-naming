@@ -126,10 +126,17 @@ public class EjbClient implements AutoCloseable {
 
     private Context createInitialContext() throws NamingException {
         final Properties clientProperties = new Properties();
-        clientProperties.setProperty(SSL_ENABLED_PROPERTY, Boolean.FALSE.toString());
+        final boolean sslEnabled = providerUrl.contains("https");
+        clientProperties.setProperty(SSL_ENABLED_PROPERTY, Boolean.toString(sslEnabled));
         clientProperties.setProperty(SCOPED_CONTEXT_PROPERTY, Boolean.TRUE.toString());
         clientProperties.setProperty(Context.INITIAL_CONTEXT_FACTORY, WILDFLY_NAMING_CLIENT_INITIAL_CONTEXT_FACTORY);
         clientProperties.setProperty(Context.PROVIDER_URL, providerUrl);
+        final String principal = System.getProperty(Context.SECURITY_PRINCIPAL);
+        final String credentials = System.getProperty(Context.SECURITY_CREDENTIALS);
+        if (EjbStringUtils.isPopulated(principal) && EjbStringUtils.isPopulated(credentials)) {
+            clientProperties.setProperty(Context.SECURITY_PRINCIPAL, principal);
+            clientProperties.setProperty(Context.SECURITY_CREDENTIALS, credentials);
+        }
         clientProperties.putAll(getConnectionProperties());
         clientProperties.putAll(customProperties);
         return new InitialContext(clientProperties);
